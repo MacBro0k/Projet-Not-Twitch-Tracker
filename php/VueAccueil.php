@@ -11,5 +11,6 @@
     <?php
     }
     ?>
+    <p><?php echo $streamerByName?></p>
     </body>
 </html>
