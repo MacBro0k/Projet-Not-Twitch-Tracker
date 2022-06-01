@@ -11,6 +11,6 @@
     <?php
     }
     ?>
-    <p><?php echo $streamerByName?></p>
+    <p><?php echo $streamerByName[0]['streamer_name']?></p>
     </body>
 </html>

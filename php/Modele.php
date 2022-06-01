@@ -1,21 +1,22 @@
 <?php
 
 function getAllStreamers() {
-    $host = 'localhost'; // Adresse de la base de données
-    $name = 'twitch_tracker'; // Nom de la base de données à utiliser
-    $user = 'root'; // Utilisateur de la base de données
-    $pass = ''; // Mot de passe de la base de données
-    $db = new PDO("mysql:host=$host;dbname=$name", $user, $pass); // Initialisation de la connexion à la base
-    $streamers = $db->query('SELECT id AS streamer_id, name AS streamer_name FROM streamers');
-    return $streamers;
+    $db = new PDO("mysql:host=localhost;dbname=twitch_tracker", 'root', ''); // Initialisation de la connexion à la base
+    $req = $db->prepare('SELECT id AS streamer_id, name AS streamer_name FROM streamers');
+    $req->execute();
+    $streamers = $req->fetchAll(PDO::FETCH_ASSOC);
+    sendJSON($streamers);
 }
 
 function getStreamerByName($search_name) {
-    $host = 'localhost'; // Adresse de la base de données
-    $name = 'twitch_tracker'; // Nom de la base de données à utiliser
-    $user = 'root'; // Utilisateur de la base de données
-    $pass = ''; // Mot de passe de la base de données
-    $db = new PDO("mysql:host=$host;dbname=$name", $user, $pass); // Initialisation de la connexion à la base
-    $streamers = $db->query('SELECT id AS streamer_id, name AS streamer_name FROM streamers WHERE name = $search_name');
-    return $streamers;
+    $db = new PDO("mysql:host=localhost;dbname=twitch_tracker", 'root', ''); // Initialisation de la connexion à la base
+    $req = $db->prepare('SELECT id AS streamer_id, name AS streamer_name FROM streamers WHERE name = :search_name');
+    $req->bindValue(":search_name", $search_name, PDO::PARAM_STR);
+    $req->execute();
+    $streamer = $req->fetchAll(PDO::FETCH_ASSOC);
+    sendJSON($streamer);
+}
+
+function sendJSON($infos) { // Affiche les résultats au format JSON
+    echo json_encode($infos, JSON_UNESCAPED_UNICODE);
 }
