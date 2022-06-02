@@ -18,7 +18,7 @@ async function getAllStreamers(page = 1){
 
 async function getStreamer(search_name){
   const rows = await db.query(
-    `SELECT id AS streamer_id, name AS streamer_name FROM streamers WHERE name = "${search_name}"`
+    `SELECT id AS streamer_id, name AS streamer_name, profile_picture FROM streamers WHERE name = "${search_name}"`
   );
   const data = helper.emptyOrRows(rows);
 
