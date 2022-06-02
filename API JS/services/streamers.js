@@ -38,5 +38,4 @@ module.exports = {
   getAllStreamers,
   getStreamer,
   getStreamerStats,
-  addStreamer
 }
