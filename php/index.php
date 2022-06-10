@@ -2,8 +2,10 @@
 
 require 'Modele.php';
 
-$streamers = getAllStreamers();
+$db = db_connect('localhost', 'twitch_tracker', 'root', '');
 
-$streamerByName = getStreamerByName('KAMETO');
+$streamers = getAllStreamers($db);
+
+$domingo = getStreamerByName($db, 'DOMINGO');
 
 require 'VueAccueil.php';

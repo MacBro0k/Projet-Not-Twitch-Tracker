@@ -5,12 +5,20 @@
     </head>
     <body>
     <?php 
-    foreach ($streamers as $streamer) {
+    foreach ($streamers as $streamer)
+    {
     ?>
     <p><?php echo $streamer['streamer_name'] ?></p>
     <?php
     }
     ?>
-    <p><?php echo $streamerByName?></p>
+    <?php
+    foreach ($domingo as $streamer)
+    {
+    ?>
+    <p><?php echo gettype($streamer) ?></p>
+    <?php
+    }
+    // <p><?php echo $domingo ?></p>
     </body>
 </html>
